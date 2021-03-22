@@ -1,7 +1,7 @@
-# ATtiny412-Sleeping-Lighthouse
+# ATtiny412 Sleeping Lighthouse
 A Demonstration of the POWER DOWN Sleep Mode of the ATtiny412
 
-## ATtiny412 Sleeping Lighthouse
+## Introduction
 
 This is a small program to demonstrate the POWER DOWN sleep mode of the ATtiny412.  In this mode of operation the average current consumed by my test board in POWER DOWN sleep was approximately 0.6 microamperes when running from two AA cells.  When the MCU is active the processor speed is configured to 4 MHz, to allow the MCU to run over the full voltage range.
 
@@ -9,9 +9,13 @@ It should be a straightforward task to modify this code to run on the ATTiny3216
 
 Microchip application note AN2515 AVR® Low-Power Techniques is a good reference.  It can be found at:  http://ww1.microchip.com/downloads/en/Appnotes/AN2515-AVR-Low-Power-Techniques-00002515C.pdf
 
+The purpose of this project is to simulate the light output of a lighthouse (based on the Pt No Point Lighthouse in Puget Sound) that produces a group of three flashes followed by a light off period of several seconds.  Basically an alterntaive blink sketch, except that when the LED is off the MCU will be in the POWER DOWN sleep state, drawing less than 1 microampere from the battery.
+
+## Method
+
 The method of this example is that the internal 32.7 KHz oscillator* will operate continually, even in POWER DOWN sleep mode, and that the RTC-PIT is configured to cause an interrupt approximately every 500 ms.  That interrupt (or any interrupt) will wake the MCU to resume code execution.  
 
-[*The internal 32.7 kHz oscillator is optimized for low current operation at the expense of accuracy.  Although accuracy of the internal 32.7 kHz oscillator at 3V 25F is +/-3%, which is pretty good, the frequency climbs to about 34.5 kHz at 5V 25F. Over the full voltage and temperature range the accuracy of the internal 32.7 kHz oscillator is estimated to be no worse then +/- 30%, which is a pretty wide swing.  If better accuracy is needed one should use an external 32,768 Hz crystal connected to the oscillator at pins TOSC1/2, however the current consumed during sleep will be greater than that of the internal 32.7 kHz oscillator.  Note: quartz crystal accuracy is almost always better than +/-100 ppm right out of the box; it’s easy with care to get to +/-25 ppm; and +/-1 ppm will probably require TXCO efforts.]
+[*The internal 32.7 kHz oscillator is optimized for low current operation at the expense of accuracy (see sections 35.4 and 39.6 in the data sheet for details). Although accuracy of the internal 32.7 kHz oscillator at 3V 25F is +/-3%, which is pretty good, the frequency climbs to about 34.5 kHz at 5V 25F. Over the full voltage and temperature range the accuracy of the internal 32.7 kHz oscillator is estimated to be no worse then +/- 30%, which is a pretty wide swing.  If better accuracy is needed one should use an external 32,768 Hz crystal connected to the oscillator at pins TOSC1/2, however the current consumed during sleep will be greater than that of the internal 32.7 kHz oscillator.  Note: quartz crystal accuracy is almost always better than +/-100 ppm right out of the box; it’s easy with care to get to +/-25 ppm; and +/-1 ppm will probably require TXCO efforts.]
 
 Making use of that sleep mechanism, the program flashes an LED (125 ms on, 1.5 seconds off) three times, and then the LED will remain off for an additional 2.5 seconds.  When the LED is on the MCU is in the active (run) state.  When the LED is off, the MCU is almost always in the POWER DOWN sleep state.
 
@@ -29,7 +33,7 @@ Note that the only way to exit sleep mode and resume program execution is for ei
 
 ## Testing Current Consumption
 
-To measure small currents (100nA to 10 uA) usually requires a good quality DVM when operating in the current mode.  Below I describe how to qualify and use a cheap DVM (like the $15 DT9205A or DT9208A DVMs on Ebay) to measure the sleep current.  The first step is to get a rough idea of the accuracy of the volt meter at low voltages (5mV).  Even cheap meters are usually pretty good in this range, but it’s always best to double-check.
+Measurement of small currents (0.1 to 10 uA) usually requires a good quality digital multimeter.  Below I describe how to qualify and use a cheap digital voltmeter (like the $15 DT9205A or DT9208A DVMs on Ebay) to measure the sleep current.  The first step is to get a rough idea of the accuracy of the volt meter at low voltages (5mV).  Even cheap meters are usually pretty good in this range, but it’s always best to double-check.
 
 Wire the circuit shown in Figure 2 shown below.
 
