@@ -9,7 +9,7 @@ It should be a straightforward task to modify this code to run on the ATTiny3216
 
 Microchip application note *AN2515 AVR® Low-Power Techniques* is a good reference.  It can be found at:  http://ww1.microchip.com/downloads/en/Appnotes/AN2515-AVR-Low-Power-Techniques-00002515C.pdf
 
-The purpose of this project is to simulate the light output of a lighthouse (based loosely on lighting pattern from the Pt No Point Lighthouse on Puget Sound) that produces a group of three flashes followed by an off period of several seconds.  Basically, this program is an alterntaive blink sketch, except that when the LED is off the MCU will be in the POWER DOWN sleep state, drawing less than 1 microampere from the battery.
+The purpose of this project is to simulate the light output of a lighthouse (based loosely on the lighting pattern of the Point No Point Lighthouse on Puget Sound) that produces a group of three flashes followed by an off period of several seconds.  Basically, this program is an alterntaive blink sketch, except that when the LED is off the MCU will be in the POWER DOWN sleep state, drawing typically less than 1 microampere from the battery.
 
 This code was written for the Arduino IDE using Spence Konde's megaTinyCore ( https://github.com/SpenceKonde/megaTinyCore ) and pyupdi style programming with a USB-serial adapter and 4.7K resistor.
 
