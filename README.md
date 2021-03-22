@@ -35,19 +35,25 @@ Note that the only way to exit sleep mode and resume program execution is for ei
 
 Measurement of small currents (0.1 to 10 uA) usually requires a good quality digital multimeter.  Below I describe how to qualify and use a cheap digital voltmeter (like the $15 DT9205A or DT9208A DVMs on Ebay) to measure the sleep current.  The first step is to get a rough idea of the accuracy of the volt meter at low voltages (5mV).  Even cheap meters are usually pretty good in this range, but it’s always best to double-check.
 
-Wire the circuit shown in Figure 2 shown below.
+Wire the circuit shown in Figure 1 shown below.
 
-![ATtiny412-Sleeping- Lighhouse- Fig-2](https://user-images.githubusercontent.com/73540066/111934733-62ab7d00-8a98-11eb-947f-1c41b03b66b4.png)
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/73540066/111998413-5a802b80-8af2-11eb-9ffd-bbe304714b73.png" />
+</p>
+
+
+
+
   
 Resistors with 5% tolerance are fine.  Measure and record the voltage from T1 to ground; it should be 1.5 to 1.6 VDC (if it’s lower than 1.45 the AA cell should be replaced).  Next, measure and record the voltage from TP2 to ground. Calculate the difference between the two measurements.  They should differ by no more than 50 mV (15 mV is typical).  If the meter fails this test then the input impedance is too low, and you will need to try a different meter.  Now set your volt meter to lowest DC voltage scale available (probably 200mV full scale) but not less than 20 mV full scale.  Measure the voltage from TP3 to Ground.  It should be about 11 mV.  If it’s outside the range of 8 to 15 mV then go find another meter, the one under test is not acceptable.  Next, measure the voltage from TP 1 to ground; it should be about 5 mV.  If it’s somewhere between 3 and 7 mV you are OK.  Just know that what the meter shows is equivalent to 5mV.  If the measurement is outside that range, then try another meter.
 At this point, if your meter has passed all these tests, then it may be used for the following procedure.
 
 
+Refer to the test circuit of Figure 2 shown below.
 
-Refer to the test circuit of Figure 1 shown below.
-
-![ATtiny412-Sleeping- Lighhouse- Fig-1](https://user-images.githubusercontent.com/73540066/111934732-6212e680-8a98-11eb-9a79-20dafa317b83.png)
-
+<p align="center">
+  <img src="https://user-images.githubusercontent.com/73540066/111998431-5d7b1c00-8af2-11eb-8681-149d80f9314a.png" />
+</p>
 
 Ensure that there is a shorting shunt across PH2 and that the programmer is disconnected from PH3, the UPDI connector.  You should observe that the LED is showing three flashes and then staying off for three seconds.  Now reconnect the programmer and in function main() comment out the last sleepNCycles(xxx) statement, and right below that add “sleepNCycles (16)”.  This will cause the LED off time after the three flashes to be at around 8 seconds.  Recompile and download the code to the MCU.  Disconnect the programmer and observe that the time between the three flashes of the LED is more than 6 seconds (counting aloud “one-alligator, two-alligator” accuracy is good enough).  
 
