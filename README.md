@@ -1,7 +1,7 @@
 # ATtiny412-Sleeping-Lighthouse
 A Demonstration of the POWER DOWN Sleep Mode of the ATtiny412
 
-### ATtiny412 Sleeping Lighthouse
+## ATtiny412 Sleeping Lighthouse
 
 This is a small program to demonstrate the POWER DOWN sleep mode of the ATtiny412.  In this mode of operation the average current consumed by my test board in POWER DOWN sleep was approximately 0.6 microamperes when running from two AA cells.  When the MCU is active the processor speed is configured to 4 MHz, to allow the MCU to run over the full voltage range.
 
@@ -27,7 +27,7 @@ Note that the only way to exit sleep mode and resume program execution is for ei
 
 -------------
 
-# Testing Current Consumption
+## Testing Current Consumption
 
 To measure small currents (100nA to 10 uA) usually requires a good quality DVM when operating in the current mode.  Below I describe how to qualify and use a cheap DVM (like the $15 DT9205A or DT9208A DVMs on Ebay) to measure the sleep current.  The first step is to get a rough idea of the accuracy of the volt meter at low voltages (5mV).  Even cheap meters are usually pretty good in this range, but it’s always best to double-check.
 
