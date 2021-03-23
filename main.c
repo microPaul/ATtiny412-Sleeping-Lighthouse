@@ -12,17 +12,19 @@
 //
 //  Github:  microPaul
 //
-//  The purpose of this project is to simulate the light output of a
-//  lighthouse (based loosely on the lighting pattern of the
-//  Point No Point Lighthouse on Puget Sound) that produces a group
-//  of three flashes followed by an off period of several seconds.
-//  Basically, this program is an alternative blink sketch, except
-//  that when the LED is off the MCU will be in the POWER DOWN sleep
-//  state, drawing typically less than 1 microampere from the battery.
+//  The purpose of this project is demonstrate one way to implement
+//  POWER DOWN sleep mode on AVR MCUs, using a specific example for
+//  the ATtiny412.  The project does this via an alternative blink sketch,
+//  flashing an LED three times and then remaining off for a few seconds
+//  (loosely based on the lighting pattern of the Point No Point Lighthouse
+//  on Puget sound).  The unique feature of this blink program is that when
+//  he LED is extinguished the MCU in almost always in POWER DOWN sleep mode,
+//  and draws less than 1 microamp when in that state.
 //  
 //  This code was written for the Arduino IDE using Spence Konde's
 //  megaTinyCore ( https://github.com/SpenceKonde/megaTinyCore ) and
-//  pyupdi style programming with a USB-serial adapter and 4.7K resistor.
+//  programed over UPDI using pyupdi via a USB-serial adapter and 4.7K resistor
+//  from TX to RX.
 //
 //
 // Details:  Detailed information regarding thie program can be found in
