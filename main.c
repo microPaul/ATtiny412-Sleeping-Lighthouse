@@ -18,8 +18,8 @@
 //  flashing an LED three times and then remaining off for a few seconds
 //  (loosely based on the lighting pattern of the Point No Point Lighthouse
 //  on Puget sound).  The unique feature of this blink program is that when
-//  he LED is extinguished the MCU in almost always in POWER DOWN sleep mode,
-//  and draws less than 1 microamp when in that state.
+//  the LED is extinguished the MCU will almost always be in POWER DOWN sleep
+//  mode, and consuming less than 1 microamp when in that state.
 //  
 //  This code was written for the Arduino IDE using Spence Konde's
 //  megaTinyCore ( https://github.com/SpenceKonde/megaTinyCore ) and
