@@ -15,7 +15,7 @@ This code was written for the Arduino IDE using Spence Konde's megaTinyCore ( ht
 
 ## Method
 
-The method of this example is that the internal 32.7 KHz oscillator* will operate continually, even in POWER DOWN sleep mode, and that the RTC-PIT is configured to cause an interrupt approximately every 500 ms.  That interrupt (or any interrupt) will wake the MCU to resume code execution.  
+The method of this example is that the internal 32.7 KHz oscillator* will operate continually, even in POWER DOWN sleep mode, and that the RTC-PIT is configured to cause an interrupt approximately every 500 ms.  That interrupt (or any interrupt) will wake the sleeping MCU to resume code execution.  
 
 _[*The internal 32.7 kHz oscillator is optimized for low current operation at the expense of accuracy (see sections 35.4 and 39.6 in the data sheet for details). Although accuracy of the internal 32.7 kHz oscillator at 3V 25C is +/-3%, which is pretty good, the frequency climbs to about 34.5 kHz at 5V 25C. Over the full voltage and temperature range the accuracy of the internal 32.7 kHz oscillator is estimated to be no worse then +/- 30%, which is a pretty wide swing.  If better accuracy is needed one should use an external 32,768 Hz crystal connected to the oscillator at pins TOSC1/2, however the current consumed during sleep will be greater than that of the internal 32.7 kHz oscillator.  Note: quartz crystal accuracy is almost always better than +/-100 ppm right out of the box; it’s easy with care to get to +/-25 ppm; and +/-1 ppm will probably require TXCO efforts.]_
 
