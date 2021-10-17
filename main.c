@@ -23,8 +23,10 @@
 //  
 //  This code was written for the Arduino IDE using Spence Konde's
 //  megaTinyCore ( https://github.com/SpenceKonde/megaTinyCore ) and
-//  programed over UPDI using pyupdi via a USB-serial adapter and 4.7K resistor
-//  from TX to RX.
+//  programed over UPDI using Serial UPDI via a USB<->Serial adapter and parallel
+//  combination of a Schottky Diode (I used a 1N5819 but most any Schottky
+//  diode will work) and a 4.7K resistor from TX to RX.  The cathode end of
+//  the Schottky diode goes to the TX signal on the USB<->Serial adapter.
 //
 //
 // Details:  Detailed information regarding thie program can be found in
