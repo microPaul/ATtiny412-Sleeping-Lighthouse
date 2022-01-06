@@ -11,7 +11,7 @@ Microchip application note *AN2515 AVR® Low-Power Techniques* is a good referen
 
 The purpose of this project is to simulate the light output of a lighthouse (based loosely on the lighting pattern of the Point No Point Lighthouse on Puget Sound) that produces a group of three flashes followed by an off period of several seconds.  Basically, this program is an alterntaive blink sketch, except that when the LED is off the MCU will be in the POWER DOWN sleep state, drawing typically less than 1 microampere from the battery.
 
-This code was written for the Arduino IDE using Spence Konde's megaTinyCore ( https://github.com/SpenceKonde/megaTinyCore ) and pyupdi style programming with a USB-serial adapter and 4.7K resistor.
+This code was written for the Arduino IDE using Spence Konde's megaTinyCore ( https://github.com/SpenceKonde/megaTinyCore ) and SerialUPDI style programming with a USB-serial adapter and parallel combination of a 4.7K resistor and a Schottky diode (cathode toward USB-Serial TX output).
 
 ## Method
 
@@ -29,7 +29,7 @@ Looking further at this average active current due to the for-loop MCU active ti
 
 Below are the tasks the program does before entering the sleep state.  First, it enables the 32.7 kHz internal oscillator.  Note that enabling that oscillator does not cause it to run.  Two things need to be in place to cause that oscillator to run: (a) the oscillator must be enabled and (b) some peripheral must make use of that oscillator. Second, it sets up the RTC-PIT to use the divide-by-32 output of the 32.7 kHz oscillator (this will meet criterion (b) listed above).  Third, it sets the RTC-PIT prescaler for the desired divisor.  Fourth, it checks that both the 32.7 kHz oscillator is running and that the RTC-PIT internal synchronization has occurred before proceeding further.  Fourth, it selects the mode of sleep that is desired (idle, standby, power down).  Fifth, it enables sleep mode (which doesn’t cause sleep but does make it allowable).  Sixth, it disables all peripherals that were enabled since reset that are not needed during sleep, to ensure lowest possible current consumption in the sleep state.  Finally, to enter sleep mode, it calls sleep_cpu() to put the MCU to sleep.
 
-Note that the only way to exit sleep mode and resume program execution is for either an interrupt or a reset to be detected by the MCU.  If interrupts were not configured before entering the sleep state the MCU will never enter sleep (except for a reset).
+Note that the only way to exit sleep mode and resume program execution is for either an interrupt or a reset to be detected by the MCU.  If interrupts were not configured before entering the sleep state the MCU will never exit sleep (except for a reset).
 
 -------------
 
@@ -47,7 +47,7 @@ Wire the circuit shown in Figure 1 shown below.
 
 
   
-Resistors with 5% tolerance are fine.  Measure and record the voltage from TP1 to ground; it should be 1.5 to 1.6 VDC (if it’s lower than 1.45 the AA cell should be replaced).  Next, measure and record the voltage from TP2 to ground. Calculate the difference between the two measurements.  They should differ by no more than 50 mV (15 mV is typical).  If the meter fails this test then the meter's input impedance is too low, and you will need to try a different meter.  Now set your volt meter to lowest DC voltage scale available (probably 200mV full scale) but not less than 20 mV full scale.  Measure the voltage from TP3 to Ground.  It should be about 11 mV.  If it’s outside the range of 8 to 15 mV then go find another mete because this measurement shows that the meter under test is not acceptable.  Next, measure the voltage from TP4 to ground; it should be about 5 mV.  If it’s somewhere between 3 and 7 mV you are OK.  Just know that the value displayed by the meter is equivalent to 5mV.  If the measurement is outside that range, then try another meter.
+Resistors with 5% tolerance are fine.  Measure and record the voltage from TP1 to ground; it should be 1.5 to 1.6 VDC (if it’s lower than 1.45 the AA cell should be replaced).  Next, measure and record the voltage from TP2 to ground. Calculate the difference between the two measurements.  They should differ by no more than 50 mV (15 mV is typical).  If the meter fails this test then the meter's input impedance is too low, and you will need to try a different meter.  Now set your volt meter to lowest DC voltage scale available (probably 200mV full scale) but not less than 20 mV full scale.  Measure the voltage from TP3 to Ground.  It should be about 11 mV.  If it’s outside the range of 8 to 15 mV then go find another meter because this measurement shows that the meter under test is not acceptable.  Next, measure the voltage from TP4 to ground; it should be about 5 mV.  If it’s somewhere between 3 and 7 mV you are OK.  Just know that the value displayed by the meter is equivalent to 5mV.  If the measurement is outside that range, then try another meter.
 At this point, if your meter has passed all these tests, then it may be used for the procedure presented below.
 
 
